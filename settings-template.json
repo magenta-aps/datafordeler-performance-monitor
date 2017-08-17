@@ -1,0 +1,26 @@
+{
+  "tokenurl" : "https://sts.test.data.gl/get_token_passive",
+  "domainurl" : "https://test.data.gl/",
+  "username": "username",
+  "password": "password",
+  "repetitions" : 10,
+  "requests" :
+  [
+  {
+    "url": "cpr/person/1/rest/search?efternavn=Mikkelsen",
+    "username": "anotherusername",
+    "password": "anotherpassword"
+  },
+  {
+    "url": "cpr/person/1/rest/search?efternavn=Nielsen"
+  },
+  {
+    "url": "cpr/person/1/rest/search?efternavn=Hansen"
+  },
+  {
+    "url": "cpr/person/1/rest/search?efternavn=Jensen",
+    "username": "anotherusername",
+    "password": "anotherpassword"
+  }
+  ]
+}
