@@ -1,6 +1,7 @@
 {
   "tokenurl" : "https://sts.test.data.gl/get_token_passive",
   "domainurl" : "https://test.data.gl/",
+  "touchurl" : "http://dafo-loadbalancer.test.data.gl/index.html",
   "username": "username",
   "password": "password",
   "repetitions" : 10,
