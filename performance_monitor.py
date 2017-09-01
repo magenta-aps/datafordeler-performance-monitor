@@ -1,5 +1,4 @@
 import requests
-import urllib
 import time
 import json
 import csv
