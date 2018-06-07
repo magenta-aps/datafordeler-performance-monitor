@@ -51,7 +51,7 @@ with open('output.csv', 'a') as csvfile:
     csvwriter = csv.writer(csvfile, delimiter=';',
                             quotechar='|', quoting=csv.QUOTE_MINIMAL)
     if not headerexists:
-        csvwriter.writerow(['date', 'request', 'response time', 'response time + content'])
+        csvwriter.writerow(['time', 'request', 'response time', 'response time + content'])
     now = time.strftime("%Y.%m.%d %H:%M:%S", time.localtime(time.time()))
 
     #Read requests from settings
