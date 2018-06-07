@@ -36,10 +36,23 @@ def get_response_time(url, headers, repetitions):
     return responsetimeavg, responsetimewithcontentavg
 
 #Open output file
-with open('output.csv', 'wb') as csvfile:
+
+headerexists = False
+try:
+    with open('output.csv', 'r') as csvfile:
+        for line in csvfile:
+            if len(line.strip()) > 0:
+                headerexists = True
+                break
+except IOError:
+    pass
+
+with open('output.csv', 'a') as csvfile:
     csvwriter = csv.writer(csvfile, delimiter=';',
                             quotechar='|', quoting=csv.QUOTE_MINIMAL)
-    csvwriter.writerow(['request', 'response time', 'response time + content'])
+    if not headerexists:
+        csvwriter.writerow(['date', 'request', 'response time', 'response time + content'])
+    now = time.strftime("%Y.%m.%d %H:%M:%S", time.localtime(time.time()))
 
     #Read requests from settings
     with open('settings.json', 'r') as f:
@@ -50,7 +63,7 @@ with open('output.csv', 'wb') as csvfile:
         #Get response time for load balancer
         url = config['touchurl']
         lb_timeavg, lb_timeavg_cont = get_response_time(url, stdheaders, repetitions)
-        csvwriter.writerow(["to loadbalancer", lb_timeavg, lb_timeavg_cont])
+        csvwriter.writerow([now, "to loadbalancer", lb_timeavg, lb_timeavg_cont])
 
         #Get response time for each request
         for req in config['requests']:
@@ -63,4 +76,5 @@ with open('output.csv', 'wb') as csvfile:
             timeavg, timeavg_cont = get_response_time(url, headers, repetitions)
             timeavg = format(timeavg - lb_timeavg)
             timeavg_cont = format(timeavg_cont - lb_timeavg_cont)
-            csvwriter.writerow([url, timeavg, timeavg_cont])
+            csvwriter.writerow([now, url, timeavg, timeavg_cont])
+
